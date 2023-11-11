@@ -18,7 +18,7 @@ Script-Migration -Context DataBaseContext -From InitialCreate -To addRouter
 ```
 Или
 ```
-dotnet ef migrations script InitialCreate AddCalculationType --project ./src/CEC.DL.Evaluation.ManagementService.DataAccess --startup-project ./src/Host/ -o ./src/ServiceTemplate.DataAccess/Migrations/SQL/ИМЯ_СКРИПТА.sql
+dotnet ef migrations script InitialCreate AddCalculationType --project ./src/ServiceTemplate.DataAccess --startup-project ./src/Host/ -o ./src/ServiceTemplate.DataAccess/Migrations/SQL/ИМЯ_СКРИПТА.sql
 ```
 
 6. [Опционально] Обновить базу данных командой 
