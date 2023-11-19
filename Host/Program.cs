@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Serilog.Filters;
 using ServiceTemplate.Configuration;
 using ServiceTemplate.DataAccess.Context;
 using ServiceTemplate.DataAccess.Interfaces;
@@ -14,8 +15,11 @@ using ServiceTemplate.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog((context, loggerConfiguration) => loggerConfiguration
-    .ReadFrom.Configuration(context.Configuration));
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration);
+    configuration.Filter.ByExcluding(Matching.WithProperty<string>("RequestPath", p => p == "/health"));
+});
 
 const string baseSectionConfig = "BaseConfiguration";
 
@@ -71,28 +75,30 @@ builder.Services.AddEndpointsApiExplorer();
 
 if (swaggerConfig is { IsEnabled: true })
 {
-    builder.Services.AddSwaggerGen(c =>
+    builder.Services.AddSwaggerGen(options =>
     {
-        c.SwaggerDoc("v1", new OpenApiInfo
+        options.SwaggerDoc("v1", new OpenApiInfo
         {
             Version = "v1",
             Title = $"Swagger of Template service",
             Description = "Swagger of Template service build with .NET CORE 7.0"
         });
-    
-        c.UseOneOfForPolymorphism();
-        c.EnableAnnotations();
-        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-        c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+        options.EnableAnnotations();
+        options.SupportNonNullableReferenceTypes();
+        var xmlFilename = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+        if (File.Exists(xmlFilename))
+        {
+            options.IncludeXmlComments(xmlFilename, true);
+        }
     });
 }
 
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
+app.UseDeveloperExceptionPage();
 if (swaggerConfig is { IsEnabled: true })
 {
+    app.UseSwagger();
     app.UseSwaggerUI();
 }
 

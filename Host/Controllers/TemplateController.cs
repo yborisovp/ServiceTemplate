@@ -37,12 +37,12 @@ public class TemplateController: ControllerBase, ITemplateController
         return Ok(templateDtos);
     }
 
-    [HttpGet]
-    [SwaggerOperation($"Get all {nameof(TemplateDto)}s")]
+    [HttpGet("/{templateEnum}")]
+    [SwaggerOperation($"Get {nameof(TemplateDto)}s by enum")]
     [SwaggerResponse(200, type: typeof(IEnumerable<TemplateDto>), description: $"List of {nameof(TemplateDto)}s")]
     [SwaggerResponse(400, type:typeof(ValidationProblemDetails), description: "Validation error")]
     [SwaggerResponse(500, type: typeof(ProblemDetails), description: "Server side error")]
-    public async Task<ActionResult<IEnumerable<TemplateDto>>> GetTemplatesByEnumType(TemplateEnumDto templateEnum, CancellationToken ct = default)
+    public async Task<ActionResult<IEnumerable<TemplateDto>>> GetTemplatesByEnumType([FromQuery] TemplateEnumDto templateEnum, CancellationToken ct = default)
     {
         _logger.LogDebug("Get all {name of}s with state: '{state}'", nameof(TemplateDto), templateEnum);
         var templateDtos = await _templateService.GetTemplatesByEnumTypeAsync(templateEnum, ct);
@@ -56,7 +56,7 @@ public class TemplateController: ControllerBase, ITemplateController
     [SwaggerResponse(400, type:typeof(ValidationProblemDetails), description: "Validation error")]
     [SwaggerResponse(404, type:typeof(ProblemDetails), description: $"{nameof(TemplateDto)} with provided id doesn't exists")]
     [SwaggerResponse(500, type: typeof(ProblemDetails), description: "Server side error")]
-    public async Task<ActionResult<TemplateDto>> GetByIdAsync(Guid id, CancellationToken ct = default)
+    public async Task<ActionResult<TemplateDto>> GetByIdAsync([FromQuery] Guid id, CancellationToken ct = default)
     {
         _logger.LogDebug("Get {name of} with id: '{id}'", nameof(TemplateDto), id);
         var templateDto = await _templateService.GetByIdAsync(id, ct);
@@ -70,7 +70,7 @@ public class TemplateController: ControllerBase, ITemplateController
     [SwaggerResponse(400, type: typeof(ValidationProblemDetails), description: "Validation error")]
     [SwaggerResponse(404, type:typeof(ProblemDetails), description: $"{nameof(TemplateDto)} with provided id doesn't exists")]
     [SwaggerResponse(500, type: typeof(ProblemDetails), description: "Server side error")]
-    public async Task<ActionResult<TemplateDto>> UpdateByIdAsync(Guid id, UpdateTemplateDto dtoToUpdate, CancellationToken ct = default)
+    public async Task<ActionResult<TemplateDto>> UpdateByIdAsync([FromQuery]Guid id, [FromBody] UpdateTemplateDto dtoToUpdate, CancellationToken ct = default)
     {
         _logger.LogDebug("Update {name of} with id: '{id}' and title: '{title}'", nameof(TemplateDto), id, dtoToUpdate.Title);
         var updatedTemplate = await _templateService.UpdateByIdAsync(id, dtoToUpdate, ct);
@@ -85,7 +85,7 @@ public class TemplateController: ControllerBase, ITemplateController
     [SwaggerResponse(400, type: typeof(ValidationProblemDetails), description: "Validation error")]
     [SwaggerResponse(404, type:typeof(ProblemDetails), description: $"{nameof(TemplateDto)} with provided id doesn't exists")]
     [SwaggerResponse(500, type: typeof(ProblemDetails), description: "Server side error")]
-    public async Task<ActionResult<Guid>> DeleteByIdAsync(Guid id, CancellationToken ct = default)
+    public async Task<ActionResult<Guid>> DeleteByIdAsync([FromQuery] Guid id, CancellationToken ct = default)
     {
         _logger.LogDebug("Delete {name of} with id: '{id}'", nameof(TemplateDto), id);
         var deletedTemplateId = await _templateService.DeleteByIdAsync(id, ct);
