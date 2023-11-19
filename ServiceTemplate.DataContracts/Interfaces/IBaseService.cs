@@ -22,6 +22,7 @@ public interface IBaseService<TDto, TUniqueIdentifier, in TDtoToUpdate>
     /// <summary>
     /// Update dto
     /// </summary>
+    /// <param name="id">Unique identifier</param>
     /// <param name="dtoToUpdate">Entity with all fields</param>
     /// <param name="ct">Cancellation token</param>
     /// <returns>Updated entity</returns>
@@ -31,7 +32,7 @@ public interface IBaseService<TDto, TUniqueIdentifier, in TDtoToUpdate>
     /// <summary>
     /// Delete entity by identifier
     /// </summary>
-    /// <param name="id">Entity identifier</param>
+    /// <param name="id">Unique identifier</param>
     /// <param name="ct">Cancellation token</param>
     /// <returns>Identifier of deleted entity</returns>
     /// <exception cref="KeyNotFoundException">If template doesn't exists, trows an error of type KeyNotFound</exception>
