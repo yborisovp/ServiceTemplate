@@ -90,7 +90,7 @@ public class TemplateController: ControllerBase, ITemplateController
     /// Update template by Id
     /// </summary>
     /// <param name="id">Id of template</param>
-    /// <param name="dtoToUpdate">DTO of a Template with updated fields</param>
+    /// <param name="dtoToUpdate">DTO Template with updated fields</param>
     /// <param name="ct">Cancellation token</param>
     /// <returns>Updated template</returns>
     [HttpPut("{id:Guid}")]

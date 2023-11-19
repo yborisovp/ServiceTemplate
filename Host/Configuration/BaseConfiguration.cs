@@ -1,7 +1,7 @@
 namespace ServiceTemplate.Configuration;
 
 /// <summary>
-/// Конфигурация сервиса
+/// Base configuration
 /// </summary>
 public class BaseConfiguration
 {
