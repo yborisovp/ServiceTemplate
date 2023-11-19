@@ -11,7 +11,7 @@ namespace ServiceTemplate.Interfaces;
 public interface IBaseController<TDto, TUniqueIdentifier, in TDtoToUpdate>
 {
     /// <summary>
-    /// Get all entities from repository
+    /// Get all entities 
     /// </summary>
     /// <param name="ct">Cancellation token</param>
     /// <returns>Return all entities in repository</returns>

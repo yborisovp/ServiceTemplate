@@ -87,7 +87,7 @@ public class TemplateController: ControllerBase, ITemplateController
     }
 
     /// <summary>
-    /// Fully update template by ID
+    /// Update template by Id
     /// </summary>
     /// <param name="id">Id of template</param>
     /// <param name="dtoToUpdate">DTO of a Template with updated fields</param>
