@@ -7,17 +7,26 @@ using ServiceTemplate.Mappers.Templates;
 
 namespace ServiceTemplate.Services;
 
+/// <summary>
+/// Service to grant access to db entities
+/// </summary>
 public class TemplateService: ITemplateService
 {
     private readonly ITemplateRepository _templateRepository;
     private readonly ILogger<TemplateService> _logger;
 
+    /// <summary>
+    /// Constructor of an service
+    /// </summary>
+    /// <param name="templateRepository"></param>
+    /// <param name="logger"></param>
     public TemplateService(ITemplateRepository templateRepository, ILogger<TemplateService> logger)
     {
         _templateRepository = templateRepository;
         _logger = logger;
     }
 
+    /// <inheritdoc />
     public async Task<IEnumerable<TemplateDto>> GetAllAsync(CancellationToken ct = default)
     {
         _logger.LogDebug("Get all {name of}s", nameof(TemplateDto));
@@ -28,6 +37,7 @@ public class TemplateService: ITemplateService
         return templates.Select(DbToDtoTemplateMapper.ToDto).ToList();
     }
 
+    /// <inheritdoc />
     public async Task<TemplateDto> GetByIdAsync(Guid id, CancellationToken ct = default)
     {
         _logger.LogDebug("Get {name of} with id: '{id}'", nameof(TemplateDto), id);
@@ -42,6 +52,7 @@ public class TemplateService: ITemplateService
         return template.ToDto();
     }
 
+    /// <inheritdoc />
     public async Task<IEnumerable<TemplateDto>> GetTemplatesByEnumTypeAsync(TemplateEnumDto templateEnum, CancellationToken ct = default)
     {
         _logger.LogDebug("Get {name of} with enum state: '{state}'", nameof(TemplateDto), templateEnum);
@@ -56,6 +67,7 @@ public class TemplateService: ITemplateService
         return templatesByEnum.Select(DbToDtoTemplateMapper.ToDto).ToList();
     }
 
+    /// <inheritdoc />
     public async Task<TemplateDto> UpdateByIdAsync(Guid id, UpdateTemplateDto dtoToUpdate, CancellationToken ct = default)
     {
         _logger.LogDebug("Update {name of} with id: '{id}'", nameof(TemplateDto), id);
@@ -82,6 +94,7 @@ public class TemplateService: ITemplateService
         return result.ToDto();
     }
 
+    /// <inheritdoc />
     public async Task<Guid> DeleteByIdAsync(Guid id, CancellationToken ct = default)
     {
         _logger.LogDebug("Delete {name of} with id: '{id}'", nameof(TemplateDto), id);

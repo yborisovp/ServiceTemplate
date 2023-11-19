@@ -3,8 +3,17 @@ using ServiceTemplate.DataContracts.Dtos.Templates.Enums;
 
 namespace ServiceTemplate.Mappers.Templates;
 
-public static class EnumMapper
+/// <summary>
+/// Mapping Template enum types to dto and reverse
+/// </summary>
+public static class TemplateEnumMapper
 {
+    /// <summary>
+    /// Mapping db enum to dto enum
+    /// </summary>
+    /// <param name="templateEnum">Enum type</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentOutOfRangeException">If values doesn't exists provides an mapping error</exception>
     public static TemplateEnumDto ToDto(this TemplateEnum templateEnum)
     {
         return templateEnum switch
@@ -15,6 +24,12 @@ public static class EnumMapper
         };
     }
     
+    /// <summary>
+    /// Mapping dto enum to db enum
+    /// </summary>
+    /// <param name="templateEnum">DTO enum type</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentOutOfRangeException">If values doesn't exists provides an mapping error</exception>
     public static TemplateEnum ToEntity(this TemplateEnumDto templateEnum)
     {
         return templateEnum switch

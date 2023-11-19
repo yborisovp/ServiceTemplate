@@ -2,6 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceTemplate.Interfaces;
 
+/// <summary>
+/// Base controller methods to implement
+/// </summary>
+/// <typeparam name="TDto"></typeparam>
+/// <typeparam name="TUniqueIdentifier"></typeparam>
+/// <typeparam name="TDtoToUpdate"></typeparam>
 public interface IBaseController<TDto, TUniqueIdentifier, in TDtoToUpdate>
 {
     /// <summary>

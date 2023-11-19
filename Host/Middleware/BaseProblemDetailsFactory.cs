@@ -5,8 +5,12 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ServiceTemplate.Middleware;
 
-public class BaseProblemDatailFactory : ProblemDetailsFactory
+/// <summary>
+/// Custom implementation of Problem details
+/// </summary>
+public class BaseProblemDetailsFactory : ProblemDetailsFactory
 {
+    /// <inheritdoc />
     public override ProblemDetails CreateProblemDetails(HttpContext httpContext, int? statusCode = null, string? title = null, string? type = null, string? detail = null, string? instance = null)
     {
         ProblemDetails? problemDetails = null;
@@ -55,6 +59,8 @@ public class BaseProblemDatailFactory : ProblemDetailsFactory
 
         return problemDetails;
     }
+
+    /// <inheritdoc />
     public override ValidationProblemDetails CreateValidationProblemDetails(HttpContext httpContext, ModelStateDictionary modelStateDictionary, int? statusCode = null, string? title = null, string? type = null, string? detail = null, string? instance = null)
     {
         if (modelStateDictionary == null)
