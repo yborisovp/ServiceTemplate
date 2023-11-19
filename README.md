@@ -1,3 +1,3 @@
-# This is base implementation of microservice for template propouses
+# This is a basic implementation of a microservice template
 
-to run this project just **restore** packadges and execute **dotnet run**
+To run this project, just **restore** the packages and execute the **dotnet run** command
