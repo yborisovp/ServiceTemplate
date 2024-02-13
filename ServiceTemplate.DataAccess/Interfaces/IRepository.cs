@@ -18,6 +18,14 @@ public interface IRepository<T, TUniqueIdentifier>
     Task<T> GetByIdAsync(TUniqueIdentifier id, CancellationToken ct = default);
 
     /// <summary>
+    /// Create entity
+    /// </summary>
+    /// <param name="entityToCreate">Entity with all fields</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>Created entity</returns>
+    Task<T> CreateAsync(T entityToCreate, CancellationToken ct = default);
+    
+    /// <summary>
     /// Update entity
     /// </summary>
     /// <param name="entityToUpdate">Entity with all fields</param>

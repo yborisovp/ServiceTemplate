@@ -7,7 +7,7 @@ namespace ServiceTemplate.Interfaces;
 /// <summary>
 /// Controller to grant access to Templates
 /// </summary>
-public interface ITemplateController: IBaseController<TemplateDto, Guid, UpdateTemplateDto>
+public interface ITemplateController: IBaseController<TemplateDto, Guid, CreateTemplateDto, UpdateTemplateDto>
 {
     /// <summary>
     /// Get template by enum type

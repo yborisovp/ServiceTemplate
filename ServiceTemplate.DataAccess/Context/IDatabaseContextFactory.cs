@@ -1,6 +1,7 @@
-namespace ServiceTemplate.DataAccess.Context;
+namespace FR.DataAccess.Context;
 
-public interface IDatabaseContextFactory
+public interface IDatabaseContextFactory<T>
 {
-    DatabaseContext CreateDbContext();
+    public Func<string> ConnectionStringProvider { get; }
+    T CreateDbContext();
 }

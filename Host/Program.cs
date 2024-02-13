@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
+using FR.DataAccess.Context;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -40,11 +41,18 @@ builder.Services.AddProblemDetails();
 builder.Services.AddHealthChecks();
 
 var databaseConfig = baseConfiguration.DatabaseConfig;
-builder.Services.AddDbContext<DatabaseContext>(options => DatabaseContextFactory.CreateDbContext(options, databaseConfig.FullConnectionString));
-builder.Services.AddScoped<IDatabaseContextFactory>(_ => new DatabaseContextFactory(databaseConfig.FullConnectionString));
+builder.Services.AddDbContext<DatabaseContext>(options => DatabaseContextFactory.CreateDbContext((DbContextOptionsBuilder<DatabaseContext>)options, databaseConfig.FullConnectionString));
+builder.Services.AddScoped<IDatabaseContextFactory<DatabaseContext>>(_ => new DatabaseContextFactory(databaseConfig.FullConnectionString));
+
+builder.Services.AddScoped<IDatabaseContextFactory<DatabaseContext>>(_ => new DatabaseContextFactory(databaseConfig.FullConnectionString));
+builder.Services.AddScoped<IDatabaseContextFactory<IdentityDatabaseContext>>(_ => new IdentityDatabaseContextFactory(databaseConfig.FullConnectionString));
+
 
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 const string customPolicyName = "CustomCors";
 var origins = (builder.Configuration.GetSection($"CorsConfiguration:Origins")
@@ -81,7 +89,7 @@ if (swaggerConfig is { IsEnabled: true })
         {
             Version = "v1",
             Title = $"Swagger of Template service",
-            Description = "Swagger of Template service build with .NET CORE 7.0"
+            Description = "Swagger of Template service build with .NET CORE 8.0"
         });
         options.EnableAnnotations();
         options.SupportNonNullableReferenceTypes();

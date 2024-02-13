@@ -1,6 +1,6 @@
 namespace ServiceTemplate.DataContracts.Interfaces;
 
-public interface IBaseService<TDto, TUniqueIdentifier, in TDtoToUpdate>
+public interface IBaseService<TDto, TUniqueIdentifier, in TDtoToCreate, in TDtoToUpdate>
 {
     /// <summary>
     /// Get all entities from repository
@@ -18,7 +18,15 @@ public interface IBaseService<TDto, TUniqueIdentifier, in TDtoToUpdate>
     /// <returns>Return entity by id</returns>
     /// <exception cref="KeyNotFoundException">If template doesn't exists, trows an error of type KeyNotFound</exception>
     Task<TDto> GetByIdAsync(TUniqueIdentifier id, CancellationToken ct = default);
-
+    
+    /// <summary>
+    /// Create dto
+    /// </summary>
+    /// <param name="dtoToCreate">Entity with all fields</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>Created entity</returns>
+    Task<TDto> CreateAsync(TDtoToCreate dtoToCreate, CancellationToken ct = default);
+    
     /// <summary>
     /// Update dto
     /// </summary>

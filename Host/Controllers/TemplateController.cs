@@ -16,17 +16,17 @@ namespace ServiceTemplate.Controllers;
 [Consumes("application/json")]
 public class TemplateController: ControllerBase, ITemplateController
 {
-    private readonly ITemplateService _templateService;
+    private readonly ITemplateService _service;
     private readonly ILogger<TemplateController> _logger;
 
     /// <summary>
     /// Constructor of TemplateController
     /// </summary>
-    /// <param name="templateService"></param>
+    /// <param name="service"></param>
     /// <param name="logger"></param>
-    public TemplateController(ITemplateService templateService, ILogger<TemplateController> logger)
+    public TemplateController(ITemplateService service, ILogger<TemplateController> logger)
     {
-        _templateService = templateService;
+        _service = service;
         _logger = logger;
     }
     
@@ -42,7 +42,7 @@ public class TemplateController: ControllerBase, ITemplateController
     public async Task<ActionResult<IEnumerable<TemplateDto>>> GetAllAsync(CancellationToken ct = default)
     {
         _logger.LogDebug("Get all {name of}s", nameof(TemplateDto));
-        var templateDtos = await _templateService.GetAllAsync(ct);
+        var templateDtos = await _service.GetAllAsync(ct);
         _logger.LogDebug("Successfully received list of {templateDto}s", nameof(TemplateDto));
         return Ok(templateDtos);
     }
@@ -61,7 +61,7 @@ public class TemplateController: ControllerBase, ITemplateController
     public async Task<ActionResult<IEnumerable<TemplateDto>>> GetTemplatesByEnumType(TemplateEnumDto templateEnum, CancellationToken ct = default)
     {
         _logger.LogDebug("Get all {name of}s with state: '{state}'", nameof(TemplateDto), templateEnum);
-        var templateDtos = await _templateService.GetTemplatesByEnumTypeAsync(templateEnum, ct);
+        var templateDtos = await _service.GetTemplatesByEnumTypeAsync(templateEnum, ct);
         _logger.LogDebug("Successfully received list of {templateDto}s with state: '{state}'", nameof(TemplateDto), templateEnum);
         return Ok(templateDtos);
     }
@@ -81,9 +81,27 @@ public class TemplateController: ControllerBase, ITemplateController
     public async Task<ActionResult<TemplateDto>> GetByIdAsync(Guid id, CancellationToken ct = default)
     {
         _logger.LogDebug("Get {name of} with id: '{id}'", nameof(TemplateDto), id);
-        var templateDto = await _templateService.GetByIdAsync(id, ct);
+        var templateDto = await _service.GetByIdAsync(id, ct);
         _logger.LogDebug("Successfully received one {templateDto} by id: '{id}'", nameof(TemplateDto), id);
         return Ok(templateDto);
+    }
+    
+    /// <summary>
+    /// Create new user
+    /// </summary>
+    /// <param name="dtoToCreate">New entity</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>List of users</returns>
+    [HttpPost]
+    [SwaggerOperation($"Create {nameof(TemplateDto)}")]
+    [SwaggerResponse(200, type: typeof(IEnumerable<TemplateDto>), description: $"Created {nameof(TemplateDto)}")]
+    [SwaggerResponse(500, type: typeof(ProblemDetails), description: "Server side error")]
+    public async Task<ActionResult<TemplateDto>> CreateAsync(CreateTemplateDto dtoToCreate, CancellationToken ct = default)
+    {
+        _logger.LogDebug("Create {name of} with Title: '{Title}'", nameof(TemplateDto), dtoToCreate.Title);
+        var result = await _service.CreateAsync(dtoToCreate, ct);
+        _logger.LogDebug("Successfully create {result} with id: '{id}'", nameof(TemplateDto), result.Id);
+        return new ObjectResult(result);
     }
 
     /// <summary>
@@ -102,7 +120,7 @@ public class TemplateController: ControllerBase, ITemplateController
     public async Task<ActionResult<TemplateDto>> UpdateByIdAsync(Guid id, [FromBody] UpdateTemplateDto dtoToUpdate, CancellationToken ct = default)
     {
         _logger.LogDebug("Update {name of} with id: '{id}' and title: '{title}'", nameof(TemplateDto), id, dtoToUpdate.Title);
-        var updatedTemplate = await _templateService.UpdateByIdAsync(id, dtoToUpdate, ct);
+        var updatedTemplate = await _service.UpdateByIdAsync(id, dtoToUpdate, ct);
         _logger.LogDebug("Successfully update {templateDto} by id: '{id}'", nameof(TemplateDto), id);
         
         return Ok(updatedTemplate);
@@ -123,7 +141,7 @@ public class TemplateController: ControllerBase, ITemplateController
     public async Task<ActionResult<Guid>> DeleteByIdAsync(Guid id, CancellationToken ct = default)
     {
         _logger.LogDebug("Delete {name of} with id: '{id}'", nameof(TemplateDto), id);
-        var deletedTemplateId = await _templateService.DeleteByIdAsync(id, ct);
+        var deletedTemplateId = await _service.DeleteByIdAsync(id, ct);
         _logger.LogDebug("Successfully delete {templateDto} by id: '{id}'", nameof(TemplateDto), id);
         
         return Ok(deletedTemplateId);

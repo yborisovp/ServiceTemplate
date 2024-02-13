@@ -1,28 +1,31 @@
-﻿# Обновление миграций
-1. Найти в Solution Explorer'е проект `Host`. Выбрать в контекстом меню пункт Set as StartUp Project.
-2. Открыть окно Tools -> NuGet Package Manager -> Package Manager Console.
-3. В выпадающем списке `Default project`, расположенном в верхней части окна, выбрать `ServiceTemplate.DataAccess`.
-4. Создать новую миграцию с помощью команды:
+﻿# Migration update
+1. Find the `Host` project in Solution Explorer. Select Set as StartUp Project from the context menu.
+2. Open the Tools -> NuGet Package Manager -> Package Manager Console window.
+3. In the `Default project` drop-down list at the top of the window, select `ServiceTemplate.DataAccess`.
+
+## Create a new migration using the command:
 
 ```
 Add-Migration Initial -Context DataBaseContext
 ```
-Или
-```
-dotnet ef migrations add InitialCreate --context DatabaseContext --output-dir Migrations/  --project ./src/ServiceTemplate.DataAccess --startup-project ./src/Host/ 
+Or
+```shell
+dotnet ef migrations add InitialCreate --context DatabaseContext  --output-dir Migrations/Tempaltes  --project ../ServiceTemplate.DataAccess --startup-project ../Host/
 ```
 
-5. Создать SQL-скрипт с помощью команды:
+## Create an SQL script using the command:
 ```
 Script-Migration -Context DataBaseContext -From InitialCreate -To addRouter
 ```
-Или
-```
-dotnet ef migrations script InitialCreate AddCalculationType --project ./src/ServiceTemplate.DataAccess --startup-project ./src/Host/ -o ./src/ServiceTemplate.DataAccess/Migrations/SQL/ИМЯ_СКРИПТА.sql
+
+Or
+
+```shell
+ dotnet ef migrations script --context DatabaseContext --project ../ServiceTemplate.DataAccess --startup-project ../Host/ -o ../ServiceTemplate.DataAccess/Migrations/SQL/Tempaltes/InitialCreate.sql
 ```
 
-6. [Опционально] Обновить базу данных командой 
-```
+## [Optional] Update the database with the command
+```shell
 dotnet ef database update --project ./src/ServiceTemplate.DataAccess --startup-project ./src/Host/
 ```
 

@@ -8,7 +8,8 @@ namespace ServiceTemplate.Interfaces;
 /// <typeparam name="TDto"></typeparam>
 /// <typeparam name="TUniqueIdentifier"></typeparam>
 /// <typeparam name="TDtoToUpdate"></typeparam>
-public interface IBaseController<TDto, TUniqueIdentifier, in TDtoToUpdate>
+/// <typeparam name="TDtoToCreate"></typeparam>
+public interface IBaseController<TDto, TUniqueIdentifier, in TDtoToCreate, in TDtoToUpdate>
 {
     /// <summary>
     /// Get all entities 
@@ -25,6 +26,8 @@ public interface IBaseController<TDto, TUniqueIdentifier, in TDtoToUpdate>
     /// <returns>Return entity by id</returns>
     Task<ActionResult<TDto>> GetByIdAsync(TUniqueIdentifier id, CancellationToken ct = default);
 
+    Task<ActionResult<TDto>> CreateAsync(TDtoToCreate dtoToCreate, CancellationToken ct = default);
+    
     /// <summary>
     /// Update dto
     /// </summary>

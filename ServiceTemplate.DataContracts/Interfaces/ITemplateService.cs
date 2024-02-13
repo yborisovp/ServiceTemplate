@@ -4,7 +4,7 @@ using ServiceTemplate.DataContracts.Dtos.Templates.Enums;
 
 namespace ServiceTemplate.DataContracts.Interfaces;
 
-public interface ITemplateService : IBaseService<TemplateDto, Guid, UpdateTemplateDto>
+public interface ITemplateService : IBaseService<TemplateDto, Guid, CreateTemplateDto, UpdateTemplateDto>
 {
     
     /// <summary>

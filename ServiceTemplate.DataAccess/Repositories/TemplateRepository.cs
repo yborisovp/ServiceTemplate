@@ -1,3 +1,4 @@
+using FR.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ServiceTemplate.DataAccess.Context;
@@ -11,7 +12,7 @@ public class TemplateRepository : BaseRepository, ITemplateRepository
 {
     private readonly ILogger<TemplateRepository> _logger;
     
-    public TemplateRepository(IDatabaseContextFactory contextFactory, ILogger<TemplateRepository> logger) : base(contextFactory)
+    public TemplateRepository(IDatabaseContextFactory<DatabaseContext> contextFactory, IDatabaseContextFactory<IdentityDatabaseContext> identityContextFactory,  ILogger<TemplateRepository> logger) : base(contextFactory, identityContextFactory)
     {
         _logger = logger;
     }
@@ -40,6 +41,15 @@ public class TemplateRepository : BaseRepository, ITemplateRepository
         }
 
         return template;
+    }
+
+    public async Task<Template> CreateAsync(Template entityToCreate, CancellationToken ct = default)
+    {
+        await using var context = ContextFactory.CreateDbContext();
+        var entity = await context.Templates.AddAsync(entityToCreate, ct);
+        await context.SaveChangesAsync(ct);
+        var result = await GetByIdAsync(entity.Entity.Id, ct);
+        return result;
     }
 
     public async Task<Template> UpdateAsync(Template entityToUpdate, CancellationToken ct = default)
