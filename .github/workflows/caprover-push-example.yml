@@ -1,11 +1,9 @@
-name: .NET Core Desktop
+name: Push to CapRover example
 env:
   DockerContainer: 'template'
 on:
-  push:
-    branches: [ "master" ]
-  workflow_dispatch:
-
+  workflow_dispatch: 
+    
 jobs:
 
   build:
