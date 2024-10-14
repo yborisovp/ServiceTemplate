@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        dotnet-version: [6.x, 7.x] # Specify the .NET versions you want to test against
+        dotnet-version: [7.x, 8.x] # Specify the .NET versions you want to test against
 
     steps:
       - name: Check out repository
