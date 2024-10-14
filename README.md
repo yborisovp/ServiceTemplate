@@ -1,9 +1,6 @@
-# This is a basic implementation of a microservice template
+# Overview of the Microservice Template
 
-To run this project, just **restore** the packages and execute the **dotnet run** command
-
-
-This is a simple example of idea of this repo:
+Here’s a diagram illustrating the structure of this repository:
 
 ```mermaid
 graph TD;
@@ -13,4 +10,8 @@ graph TD;
     Host-->DataContracts
 ```
 
-This straucture present good abstraction on projects.
+This structure provides a clean abstraction across different components of the project.
+
+For a practical example of how to use this template, check out the "example-usage" branch.
+
+**Be sure** to update the root namespace to match your project's structure. You can use the appropriate rename-script.* file for your system to handle this update.

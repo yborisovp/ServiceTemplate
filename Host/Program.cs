@@ -8,11 +8,7 @@ using Serilog;
 using Serilog.Filters;
 using ServiceTemplate.Configuration;
 using ServiceTemplate.DataAccess.Context;
-using ServiceTemplate.DataAccess.Interfaces;
-using ServiceTemplate.DataAccess.Repositories;
-using ServiceTemplate.DataContracts.Interfaces;
 using ServiceTemplate.Middleware;
-using ServiceTemplate.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,14 +41,8 @@ builder.Services.AddDbContext<DatabaseContext>(options => DatabaseContextFactory
 builder.Services.AddScoped<IDatabaseContextFactory<DatabaseContext>>(_ => new DatabaseContextFactory(databaseConfig.FullConnectionString));
 
 builder.Services.AddScoped<IDatabaseContextFactory<DatabaseContext>>(_ => new DatabaseContextFactory(databaseConfig.FullConnectionString));
-builder.Services.AddScoped<IDatabaseContextFactory<IdentityDatabaseContext>>(_ => new IdentityDatabaseContextFactory(databaseConfig.FullConnectionString));
 
-
-builder.Services.AddScoped<ITemplateService, TemplateService>();
-builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
-
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+//Add services and repositories here
 
 const string customPolicyName = "CustomCors";
 var origins = (builder.Configuration.GetSection($"CorsConfiguration:Origins")

@@ -42,6 +42,15 @@
 
 
 
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+      <Folder Include="Mappers\" />
+      <Folder Include="Middleware\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
+
+
 
 
 

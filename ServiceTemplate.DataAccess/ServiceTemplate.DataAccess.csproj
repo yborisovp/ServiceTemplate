@@ -18,7 +18,9 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Context\ModelsConfiguration\" />
+      <Folder Include="Interfaces\" />
       <Folder Include="Migrations\SQL\" />
+      <Folder Include="Models\" />
     </ItemGroup>
 
 </Project>

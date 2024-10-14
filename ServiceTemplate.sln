@@ -12,6 +12,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployments", "deployments"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F9CA6E71-EB83-4B94-ACDF-6AA846F9CDE1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external files", "external files", "{E02D85B7-7BE3-4FBB-806E-44CEE184DAE3}"
+	ProjectSection(SolutionItems) = preProject
+		rename-script.ps1 = rename-script.ps1
+		rename-script.sh = rename-script.sh
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1930D2C0-E0AA-42FB-808B-3492B992E112}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Rename script.md = docs\Rename script.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +51,6 @@ Global
 		{95F86912-7F83-4C6B-B819-DD1359C3D18A} = {F9CA6E71-EB83-4B94-ACDF-6AA846F9CDE1}
 		{91A05207-1587-4144-B813-CA86170B601E} = {F9CA6E71-EB83-4B94-ACDF-6AA846F9CDE1}
 		{6B0C7D16-EF5A-4931-807F-11320413CA47} = {F9CA6E71-EB83-4B94-ACDF-6AA846F9CDE1}
+		{1930D2C0-E0AA-42FB-808B-3492B992E112} = {E02D85B7-7BE3-4FBB-806E-44CEE184DAE3}
 	EndGlobalSection
 EndGlobal
