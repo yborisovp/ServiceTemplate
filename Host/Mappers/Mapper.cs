@@ -1,0 +1,1 @@
+//Mock for file structure. Use it to map DTO to Entity and reverso

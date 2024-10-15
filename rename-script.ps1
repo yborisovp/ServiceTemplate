@@ -65,4 +65,9 @@ Get-ChildItem -Recurse -Filter "Dockerfile" | ForEach-Object {
     Write-Host "Updated Dockerfile '$($_.FullName)'"
 }
 
+# Git add and commit
+Write-Host "Adding changes to Git..."
+git add -A
+git commit -m "Automated rename of project to $ProjectName with namespace $RootNamespace"
+
 Write-Host "All operations completed successfully."

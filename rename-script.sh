@@ -81,4 +81,9 @@ find . -type f -name "Dockerfile" | while read -r FILE; do
   sed -i "s#ServiceTemplate#$PROJECT_NAME#g" "$FILE"
 done
 
+# Git add and commit
+echo "Adding changes to Git..."
+git add -A
+git commit -m "Automated rename of project to $PROJECT_NAME with namespace $ROOT_NAMESPACE"
+
 echo "All operations completed successfully."
