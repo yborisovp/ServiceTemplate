@@ -1,8 +1,8 @@
-C# Microservice Template
+# C# Microservice Template
 
 This repository offers a foundational C# microservice template designed to streamline the development of scalable and efficient microservices. It provides a structured framework that adheres to best practices, facilitating rapid deployment and maintainability.
 
-**Key Features:**
+## **Key Features:**
 
 •	_Modular Architecture_. 
     
@@ -24,7 +24,7 @@ This repository offers a foundational C# microservice template designed to strea
     
     Comes with a Dockerfile to facilitate containerization, ensuring consistent environments across development, testing, and production.
 
-**Visualization Structure**
+## **Visualization Structure**
 
 Here’s a diagram illustrating the structure of this repository:
 
@@ -52,7 +52,7 @@ graph TD;
     OtherService2 -->|via NuGet| DataAccess
 ```
 
-**Getting Started:**
+## **Getting Started:**
 	
 1.	Clone the Repository
 ```sh
@@ -78,11 +78,11 @@ dotnet run
 ```
 
 
-**Contributing:**
+## **Contributing:**
 
 Contributions are welcome! Please fork the repository and create a pull request with your enhancements or bug fixes.
 
-**License:**
+## **License:**
 
 This project is licensed under the **MIT** License.
 
@@ -93,4 +93,5 @@ This structure provides a clean abstraction across different components of the p
 
 For a practical example of how to use this template, check out the "example-usage" branch.
 
+## Tips
 **Be sure** to update the root namespace to match your project's structure. You can use the appropriate rename-script.* file for your system to handle this update.
