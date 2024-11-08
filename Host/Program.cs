@@ -18,6 +18,8 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.Filter.ByExcluding(Matching.WithProperty<string>("RequestPath", p => p == "/health"));
 });
 
+builder.Configuration.AddEnvironmentVariables();
+
 const string baseSectionConfig = "BaseConfiguration";
 
 var swaggerConfig = builder.Configuration.GetSection(baseSectionConfig).Get<BaseConfiguration>()?.SwaggerConfig;

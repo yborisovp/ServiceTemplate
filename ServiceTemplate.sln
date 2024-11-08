@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external files", "external 
 		rename-script.ps1 = rename-script.ps1
 		rename-script.sh = rename-script.sh
 		README.md = README.md
+		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1930D2C0-E0AA-42FB-808B-3492B992E112}"
